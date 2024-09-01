@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { useParkHash } from '@/api'
+import { useParkHash } from '@/api/parkHash'
 
 const { parkList, getParkHashList } = useParkHash()
 

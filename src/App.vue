@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <h1 class="text-3xl font-bold underline text-red-600">Hello world!</h1>
+  <RouterView v-slot="{ Component }">
+    <template v-if="Component">
+      <Suspense>
+        <!-- main content -->
+        <component :is="Component"></component>
 
-    <p class="text-3xl font-bold underline text-red-600">{{ count }}</p>
-  </div>
+        <!-- loading state -->
+        <template #fallback> Loading... </template>
+      </Suspense>
+    </template>
+  </RouterView>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-
-const count = ref(0)
-</script>
+<script setup lang="ts"></script>
 
 <style></style>

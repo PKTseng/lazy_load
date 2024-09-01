@@ -1,13 +1,11 @@
+import { type AxiosRequestConfig } from 'axios'
 import service from '@/utils/request'
+import { type UnsplashPhoto } from '.'
 
-export const getImageAPI = (params: { count: number }) => {
-  return service.get('photos/random', { params })
+export const getImageAPI = (params: { count: number }): Promise<UnsplashPhoto[]> => {
+  return service.get<UnsplashPhoto[], UnsplashPhoto[]>('photos/random', { params })
 }
 
-export const getPhotosAPI = () => {
-  return service.get('photos')
-}
-
-export const getParkHashAPI = (params: { limit: number }) => {
-  return service.get('/api/explore/v2.1/catalog/datasets/100088/records', { params })
+export const getPhotosAPI = (config?: AxiosRequestConfig): Promise<UnsplashPhoto[]> => {
+  return service.get<UnsplashPhoto[], UnsplashPhoto[]>('photos', config)
 }

@@ -1,8 +1,8 @@
 import { ref } from 'vue'
-import { getImageAPI, getPhotosAPI } from '.'
+import { getImageAPI, getPhotosAPI, type UnsplashPhoto, type UnsplashPhotoArray } from '.'
 
 export const useImg = () => {
-  const imageInfoList = ref<any>([])
+  const imageInfoList = ref<UnsplashPhoto[]>([])
 
   const getImageList = async (count: number) => {
     try {
@@ -14,7 +14,7 @@ export const useImg = () => {
     }
   }
 
-  const photos = ref<any>([])
+  const photos = ref<UnsplashPhotoArray>([])
   const getPhotosList = async () => {
     try {
       const data = await getPhotosAPI()
