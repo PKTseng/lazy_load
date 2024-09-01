@@ -9,7 +9,6 @@
     >
       <div class="relative overflow-hidden group">
         <img
-          v-imgLazy
           :src="image.urls.regular"
           :alt="image.alt_description"
           class="w-full h-64 object-cover transition duration-300 group-hover:scale-110"
@@ -51,11 +50,27 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
 import { useImg } from '@/api/unsplash'
 
-const { imageInfoList, getImageList } = useImg()
+const { imageInfoList, getImageList, photos, getPhotosList } = useImg()
 
-await getImageList(20)
+// await getImageList(20)
+
+const photosRef = ref(null)
+const targetIsVisible = ref(false)
+
+const { stop } = useIntersectionObserver(photosRef, async ([{ isIntersecting }]) => {
+  targetIsVisible.value = isIntersecting
+  if (isIntersecting) {
+    console.log('GET API')
+    // await getPhotosList()
+    stop() //停止監聽
+  } else {
+    console.log('STOP API')
+  }
+})
 </script>
 
 <style scoped></style>
