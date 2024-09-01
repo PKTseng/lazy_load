@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { getImageAPI, getParkHashAPI } from '.'
+import { getImageAPI, getPhotosAPI } from '.'
 
 export const useImg = () => {
   const imageInfoList = ref<any>([])
@@ -14,21 +14,15 @@ export const useImg = () => {
     }
   }
 
-  return { imageInfoList, getImageList }
-}
-
-export const useParkHash = () => {
-  const parkList = ref<any>([])
-
-  const getParkHashList = async (limit: number) => {
+  const photos = ref<any>([])
+  const getPhotosList = async () => {
     try {
-      const data = await getParkHashAPI({ limit })
-
-      parkList.value = data
+      const data = await getPhotosAPI()
+      photos.value = data
     } catch (error) {
       console.log(error)
     }
   }
 
-  return { parkList, getParkHashList }
+  return { imageInfoList, getPhotosList, photos, getImageList }
 }
