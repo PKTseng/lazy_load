@@ -8,7 +8,7 @@ interface CustomAxiosInstance extends AxiosInstance {
 const apiKey = 'dOlftMUcqb5YZ2YRPlWU2tWRqxGL-8_U8bHUWLvvNKA'
 
 const service: CustomAxiosInstance = axios.create({
-  baseURL: 'https://api.unsplash.com',
+  baseURL: 'https://api.unsplash.com', //  https://data.bs.ch, 要測試停車 API URL
   timeout: 5000
 })
 
